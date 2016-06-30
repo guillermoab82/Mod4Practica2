@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Practica2</string>
     <string name="main_btnadd_app">Install APP</string>
+    <string name="NoApps">No apps installed!!!</string>
+    <string name="installNameAPP">App Name</string>
+    <string name="installNameDev">Developer Name</string>
+    <string name="installAppDetails">App Details</string>
+    <string name="installInstall">Installed</string>
+    <string name="installBtnSave">Save</string>
+    <string name="msj_updated">Updated</string>
+    <string name="msj_install">Installed</string>
+    <string name="delete_message">Do you want to delete item</string>
+    <string name="delete_title">Delete</string>
+    <string name="installMsgNoData">The Data are required!!!</string>
 </resources>

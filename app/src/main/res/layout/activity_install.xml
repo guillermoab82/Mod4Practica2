@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_margin="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/install_txtNameAPP"
+        android:hint="@string/installNameAPP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/install_txtNameDev"
+        android:hint="@string/installNameDev"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/install_txtAppDetails"
+        android:hint="@string/installAppDetails"
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <CheckBox
+        android:id="@+id/install_chkInstall"
+        android:text="@string/installInstall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/install_btnInstall"
+        android:text="@string/installBtnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
