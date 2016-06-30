@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_addapp.setOnClickListener(this);
         listView = (ListView) findViewById(R.id.main_list);
         appDataSource = new AppDataSource(getApplicationContext());
+        //final Context  me = this;
         List<ModelAPP> modelAppList = appDataSource.getAllAPPS();
         if(!modelAppList.isEmpty()) {
             fill_list(getApplicationContext(), modelAppList);
@@ -56,30 +57,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        /*listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long ID) {
                 AppListAdapter adapter = (AppListAdapter) parent.getAdapter();
                 final ModelAPP modelAPP = adapter.getItem(position);
                 String msg_del = getResources().getString(R.string.delete_message);
-                new AlertDialog.Builder(getApplicationContext())
+
+                new AlertDialog.Builder(me)
                         .setTitle(getResources().getString(R.string.delete_title))
                         .setMessage(String.format(msg_del+" %s?",modelAPP.cName_App))
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                            public void onClick(DialogInterface dialog, int which) {
                                 appDataSource.deleteAPP(modelAPP);
                                 fill_list(getApplicationContext(),appDataSource.getAllAPPS());
                             }
                         }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public void onClick(DialogInterface dialog, int which) {
 
                     }
                 }).setCancelable(false).create().show();
                 return true;
             }
-        });
+        });*/
     }
 
     @Override
