@@ -13,4 +13,8 @@
     <string name="delete_message">Desea eliminar el elemento</string>
     <string name="delete_title">Eliminar</string>
     <string name="installMsgNoData">Los datos son necesarios!!!</string>
+    <string name="details_Uninstall">Desinstalar</string>
+    <string name="details_Open">Abrir</string>
+    <string name="details_Update">Actualizar</string>
+    <string name="details_url1">http://www.posgrado.unam.mx</string>
 </resources>

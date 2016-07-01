@@ -12,4 +12,8 @@
     <string name="delete_message">Do you want to delete item</string>
     <string name="delete_title">Delete</string>
     <string name="installMsgNoData">The Data are required!!!</string>
+    <string name="details_Uninstall">Uninstall</string>
+    <string name="details_Open">Open</string>
+    <string name="details_Update">Update</string>
+    <string name="details_url1">http://www.posgrado.unam.mx</string>
 </resources>
