@@ -17,5 +17,6 @@
         </activity>
         <activity android:name=".InstallActivity"></activity>
         <activity android:name=".DetailsActivity"></activity>
+        <service android:name=".services.ServiceUpdateNotification"/>
     </application>
 </manifest>

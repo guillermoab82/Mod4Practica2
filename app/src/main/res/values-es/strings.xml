@@ -17,4 +17,9 @@
     <string name="details_Open">Abrir</string>
     <string name="details_Update">Actualizar</string>
     <string name="details_url1">http://www.posgrado.unam.mx</string>
+    <string name="service_Title_update">Actualizando App</string>
+    <string name="service_Text_update">Actualizando App</string>
+    <string name="service_Title_update_End">Actualización Terminada</string>
+    <string name="service_Text_update_End">Se ha completado la actualización de</string>
+    <string name="service_Info_update_End">Actualizado</string>
 </resources>
