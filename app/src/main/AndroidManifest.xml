@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".InstallActivity"></activity>
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".DetailsActivity" android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name=".EditActivity"></activity>
         <service android:name=".services.ServiceUpdateNotification"/>
     </application>
 </manifest>

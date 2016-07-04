@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Practica2</string>
+    <string name="app_name">Practica 2 Instalar App</string>
     <string name="main_btnadd_app">Instalar APP</string>
     <string name="NoApps">No hay apps instaladas!!!</string>
     <string name="installNameAPP">Nombre de la APP</string>
@@ -22,4 +22,6 @@
     <string name="service_Title_update_End">Actualización Terminada</string>
     <string name="service_Text_update_End">Se ha completado la actualización de</string>
     <string name="service_Info_update_End">Actualizado</string>
+    <string name="menu_details_edit">Editar App</string>
+    <string name="menu_details_title">Información de la App</string>
 </resources>
