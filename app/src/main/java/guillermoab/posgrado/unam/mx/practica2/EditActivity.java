@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.ToolbarWidgetWrapper;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -60,6 +61,15 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         }else{
             Toast.makeText(getApplicationContext(),getResources().getString(R.string.installMsgNoData),Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
