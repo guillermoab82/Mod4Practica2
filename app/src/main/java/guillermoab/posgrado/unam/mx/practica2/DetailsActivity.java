@@ -26,7 +26,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private int id,img_int,install;
     private TextView chkInstall;
     private static final int REQUEST_CODE_EDIT_APP = 1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +52,9 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             img.setImageResource(img_int);
             install = getIntent().getExtras().getInt("appInstall");
             if(install==0){
-                chkInstall.setText(getResources().getString(R.string.msj_updated));
-            }else{
                 chkInstall.setText(getResources().getString(R.string.msj_install));
+            }else{
+                chkInstall.setText(getResources().getString(R.string.msj_updated));
             }
         }
     }
@@ -83,7 +82,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                 intent.putExtra("appDetails",appDetails);
                 intent.putExtra("appImg",img_int);
                 intent.putExtra("appInstall",install);
-                startActivity(intent);//,REQUEST_CODE_EDIT_APP);
+                startActivityForResult(intent,REQUEST_CODE_EDIT_APP);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -120,6 +119,28 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        if(REQUEST_CODE_EDIT_APP==requestCode && resultCode==RESULT_OK){
+            //Toast.makeText(getApplicationContext(),"Regreso",Toast.LENGTH_SHORT).show();
+            fill_data(data);
+        }else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void fill_data(Intent data) {
+        if(data!=null && getIntent().getExtras().containsKey("id")){
+            id=data.getExtras().getInt("id");
+            txtappname.setText(data.getExtras().getString("appName"));
+            txtdevname.setText(data.getExtras().getString("appDev"));
+            txtdetails.setText(data.getExtras().getString("appDetails"));
+            img_int=data.getExtras().getInt("appImg");
+            img.setImageResource(img_int);
+            install = data.getExtras().getInt("appInstall");
+            if(install==0){
+                chkInstall.setText(getResources().getString(R.string.msj_install));
+            }else{
+                chkInstall.setText(getResources().getString(R.string.msj_updated));
+            }
+        }
     }
 }

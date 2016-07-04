@@ -38,7 +38,14 @@ public class AppDataSource {
         }
     }
     public void updateApp(ModelAPP modelAPP){
-
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MySQLiteHelper.COLUMN_APP_ID,modelAPP.id);
+        contentValues.put(MySQLiteHelper.COLUMN_APP_NAMEAPP,modelAPP.cName_App);
+        contentValues.put(MySQLiteHelper.COLUMN_APP_NAMEDEV,modelAPP.cName_Dev);
+        contentValues.put(MySQLiteHelper.COLUMN_APP_DETAILS,modelAPP.cApp_Details);
+        contentValues.put(MySQLiteHelper.COLUMN_APP_INSTALL,modelAPP.bInstall);
+        contentValues.put(MySQLiteHelper.COLUMN_APP_RESOURCE,modelAPP.nImageID);
+        db.update(MySQLiteHelper.TABLE_APP_NAME,contentValues,MySQLiteHelper.COLUMN_APP_ID+"=?",new String[]{String.valueOf(modelAPP.id)});
     }
     //Reading all items in DB
     public List<ModelAPP> getAllAPPS(){

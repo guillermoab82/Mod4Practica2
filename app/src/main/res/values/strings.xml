@@ -23,4 +23,6 @@
     <string name="service_Info_update_End">Updated</string>
     <string name="menu_details_edit">Edit App</string>
     <string name="menu_details_title">App Information</string>
+    <string name="installUpdate">Update</string>
+    <string name="menu_edit_title">Editing App</string>
 </resources>

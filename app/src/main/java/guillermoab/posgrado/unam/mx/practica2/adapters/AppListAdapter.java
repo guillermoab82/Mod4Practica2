@@ -34,9 +34,10 @@ public class AppListAdapter extends ArrayAdapter<ModelAPP>{
         txtNameApp.setText(modelAPP.cName_App);
         txtNameDev.setText(modelAPP.cName_Dev);
         if(modelAPP.bInstall==0){
-            txtInstall.setText(convertView.getResources().getText(R.string.msj_updated));
-        }else{
             txtInstall.setText(convertView.getResources().getText(R.string.msj_install));
+
+        }else{
+            txtInstall.setText(convertView.getResources().getText(R.string.msj_updated));
         }
         imgApp.setImageResource(modelAPP.nImageID);
         return convertView;

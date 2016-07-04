@@ -21,7 +21,7 @@
         android:layout_height="wrap_content" />
     <CheckBox
         android:id="@+id/install_chkInstall"
-        android:text="@string/installInstall"
+        android:text="@string/installUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
