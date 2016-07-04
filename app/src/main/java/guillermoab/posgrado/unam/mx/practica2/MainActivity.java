@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -19,7 +22,7 @@ import guillermoab.posgrado.unam.mx.practica2.adapters.AppListAdapter;
 import guillermoab.posgrado.unam.mx.practica2.models.ModelAPP;
 import guillermoab.posgrado.unam.mx.practica2.sql.AppDataSource;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private AppDataSource appDataSource;
     private Button btn_addapp;
@@ -31,10 +34,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btn_addapp = (Button) findViewById(R.id.main_add_app);
-        btn_addapp.setOnClickListener(this);
         listView = (ListView) findViewById(R.id.main_list);
         appDataSource = new AppDataSource(getApplicationContext());
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         //final Context  me = this;
         List<ModelAPP> modelAppList = appDataSource.getAllAPPS();
         if(!modelAppList.isEmpty()) {
@@ -85,12 +91,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.main_add_app:
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activitymain,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.menu_main_add:
                 startActivityForResult(new Intent(getApplicationContext(),InstallActivity.class),REQUEST_CODE_INSTALL_APP);
-                break;
+                return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
