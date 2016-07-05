@@ -1,9 +1,12 @@
 package guillermoab.posgrado.unam.mx.practica2;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -15,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import guillermoab.posgrado.unam.mx.practica2.services.ServiceUninstallNotification;
 import guillermoab.posgrado.unam.mx.practica2.services.ServiceUpdateNotification;
 
 /**
@@ -28,6 +32,8 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private int id,img_int,install;
     private TextView chkInstall;
     private static final int REQUEST_CODE_EDIT_APP = 1;
+    final Context me = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,10 +127,37 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void unistallApp() {
+        String msg = getResources().getString(R.string.msj_details_text);
+        new AlertDialog.Builder(me)
+                .setTitle(getResources().getString(R.string.msj_details_delete))
+                .setMessage(String.format(msg+" %s",txtappname.getText().toString()))
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        findViewById(R.id.details_btnUninstall).setEnabled(false);
+                        findViewById(R.id.details_btnOpen).setEnabled(false);
+                        findViewById(R.id.details_btnUpdate).setEnabled(false);
+                        startService(new Intent(getApplicationContext(), ServiceUninstallNotification.class));
+                    }
+                }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                findViewById(R.id.details_btnUninstall).setEnabled(true);
+                findViewById(R.id.details_btnOpen).setEnabled(true);
+                if(install==0){
+                    findViewById(R.id.details_btnUpdate).setEnabled(true);
+                }else{
+                    findViewById(R.id.details_btnUpdate).setEnabled(false);
+                }
 
+            }
+        }).setCancelable(false).show();
     }
 
     private void updateApp() {
+        findViewById(R.id.details_btnUninstall).setEnabled(false);
+        findViewById(R.id.details_btnOpen).setEnabled(false);
+        findViewById(R.id.details_btnUpdate).setEnabled(false);
         startService(new Intent(getApplicationContext(), ServiceUpdateNotification.class));
     }
 

@@ -27,4 +27,9 @@
     <string name="installUpdate">Actualizar</string>
     <string name="menu_edit_title">Editando App</string>
     <string name="menu_install_title">Instalar App</string>
+    <string name="msj_details_delete">Desinstalar App</string>
+    <string name="msj_details_text">Desea desinstalar la app </string>
+    <string name="service_Title_uninstall_End">App Desinstalada</string>
+    <string name="service_Text_uninstall_End">La desinstalación de ha completado</string>
+    <string name="service_Info_uninstall_End">Desinstalado</string>
 </resources>

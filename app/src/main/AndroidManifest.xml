@@ -19,6 +19,6 @@
         <activity android:name=".DetailsActivity" android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity android:name=".EditActivity" android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <service android:name=".services.ServiceUpdateNotification"/>
-
+        <service android:name=".services.ServiceUninstallNotification"/>
     </application>
 </manifest>
