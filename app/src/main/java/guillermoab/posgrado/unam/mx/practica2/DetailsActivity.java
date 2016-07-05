@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import guillermoab.posgrado.unam.mx.practica2.services.ServiceUpdateNotification;
 
@@ -53,10 +55,23 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             install = getIntent().getExtras().getInt("appInstall");
             if(install==0){
                 chkInstall.setText(getResources().getString(R.string.msj_install));
+                findViewById(R.id.details_btnUpdate).setEnabled(true);
             }else{
                 chkInstall.setText(getResources().getString(R.string.msj_updated));
+                findViewById(R.id.details_btnUpdate).setEnabled(false);
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            Intent i = new Intent();
+            setResult(RESULT_OK,i);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -69,6 +84,8 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
+                Intent i = new Intent();
+                setResult(RESULT_OK,i);
                 finish();
                 return true;
             case R.id.menu_details_edit:

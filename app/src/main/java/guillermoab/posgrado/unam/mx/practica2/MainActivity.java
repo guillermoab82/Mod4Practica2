@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private AppDataSource appDataSource;
     private Button btn_addapp;
     private static final int REQUEST_CODE_INSTALL_APP = 1;
+    private static final int REQUEST_CODE_DETAILS_APP = 2;
     private ListView listView;
 
 
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("appDetails",modAPP.cApp_Details);
                 intent.putExtra("appInstall",modAPP.bInstall);
                 intent.putExtra("appImg",modAPP.nImageID);
-                startActivity(intent);
+                startActivityForResult(intent,REQUEST_CODE_DETAILS_APP); //startActivity(intent);
             }
         });
         /*listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -116,7 +117,13 @@ public class MainActivity extends AppCompatActivity {
             List<ModelAPP> model = appDataSource.getAllAPPS();
             fill_list(getApplicationContext(),model);
         }else {
-            super.onActivityResult(requestCode, resultCode, data);
+            if(REQUEST_CODE_DETAILS_APP==requestCode && resultCode==RESULT_OK){
+                //Toast.makeText(getApplicationContext(),"Regreso Details",Toast.LENGTH_SHORT).show();
+                List<ModelAPP> modelAPPList = appDataSource.getAllAPPS();
+                fill_list(getApplicationContext(),modelAPPList);
+            }else{
+                super.onActivityResult(requestCode, resultCode, data);
+            }
         }
     }
 

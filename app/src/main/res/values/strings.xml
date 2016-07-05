@@ -25,4 +25,5 @@
     <string name="menu_details_title">App Information</string>
     <string name="installUpdate">Update</string>
     <string name="menu_edit_title">Editing App</string>
+    <string name="menu_install_title">Install App</string>
 </resources>
