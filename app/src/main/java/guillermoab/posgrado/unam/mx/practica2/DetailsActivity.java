@@ -18,8 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import guillermoab.posgrado.unam.mx.practica2.models.ModelAPP;
 import guillermoab.posgrado.unam.mx.practica2.services.ServiceUninstallNotification;
 import guillermoab.posgrado.unam.mx.practica2.services.ServiceUpdateNotification;
+import guillermoab.posgrado.unam.mx.practica2.sql.AppDataSource;
 
 /**
  * Created by GuillermoAB on 29/06/2016.
@@ -33,6 +35,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private TextView chkInstall;
     private static final int REQUEST_CODE_EDIT_APP = 1;
     final Context me = this;
+    private AppDataSource appDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         txtdevname=(TextView) findViewById(R.id.details_txtDevName);
         txtdetails=(TextView) findViewById(R.id.details_txtAppDetails);
         chkInstall = (TextView) findViewById(R.id.details_chkInstall);
+        appDataSource = new AppDataSource(getApplicationContext());
         if(getIntent()!=null && getIntent().getExtras().containsKey("id")){
             id=getIntent().getExtras().getInt("id");
             txtappname.setText(getIntent().getExtras().getString("appName"));
@@ -115,7 +119,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.details_btnUninstall:
-                unistallApp();
+                uninstallApp();
                 break;
             case R.id.details_btnOpen:
                 openAPP();
@@ -126,7 +130,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void unistallApp() {
+    private void uninstallApp() {
         String msg = getResources().getString(R.string.msj_details_text);
         new AlertDialog.Builder(me)
                 .setTitle(getResources().getString(R.string.msj_details_delete))
@@ -137,6 +141,14 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
                         findViewById(R.id.details_btnUninstall).setEnabled(false);
                         findViewById(R.id.details_btnOpen).setEnabled(false);
                         findViewById(R.id.details_btnUpdate).setEnabled(false);
+                        //Delete DB
+                        String appname = txtappname.getText().toString();
+                        String appdev = txtdevname.getText().toString();
+                        String appdetails = txtdetails.getText().toString();
+                        ModelAPP modelAPP = new ModelAPP(id,appname,appdev,appdetails,1,img_int);
+                        appDataSource.deleteAPP(modelAPP);
+                        
+                        //Calling Service
                         startService(new Intent(getApplicationContext(), ServiceUninstallNotification.class));
                     }
                 }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -158,6 +170,14 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.details_btnUninstall).setEnabled(false);
         findViewById(R.id.details_btnOpen).setEnabled(false);
         findViewById(R.id.details_btnUpdate).setEnabled(false);
+        //Updating DB
+        String appname = txtappname.getText().toString();
+        String appdev = txtdevname.getText().toString();
+        String appdetails = txtdetails.getText().toString();
+        ModelAPP modelAPP = new ModelAPP(id,appname,appdev,appdetails,1,img_int);
+        appDataSource.updateApp(modelAPP);
+
+        //Calling Service
         startService(new Intent(getApplicationContext(), ServiceUpdateNotification.class));
     }
 
@@ -188,8 +208,10 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             install = data.getExtras().getInt("appInstall");
             if(install==0){
                 chkInstall.setText(getResources().getString(R.string.msj_install));
+                findViewById(R.id.details_btnUpdate).setEnabled(true);
             }else{
                 chkInstall.setText(getResources().getString(R.string.msj_updated));
+                findViewById(R.id.details_btnUpdate).setEnabled(false);
             }
         }
     }
